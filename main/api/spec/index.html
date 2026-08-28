@@ -13181,6 +13181,20 @@ External Secrets meta/v1.SecretKeySelector
 <p>Token authenticates with Nebius Mysterybox by presenting a token.</p>
 </td>
 </tr>
+<tr>
+<td>
+<code>workloadIdentity</code></br>
+<em>
+<a href="#external-secrets.io/v1.NebiusWorkloadIdentity">
+NebiusWorkloadIdentity
+</a>
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>WorkloadIdentity defines configuration for workload identity authentication to Nebius IAM.</p>
+</td>
+</tr>
 </tbody>
 </table>
 <h3 id="external-secrets.io/v1.NebiusCAProvider">NebiusCAProvider
@@ -13268,6 +13282,52 @@ NebiusCAProvider
 <td>
 <em>(Optional)</em>
 <p>The provider for the CA bundle to use to validate NebiusMysterybox server certificate.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="external-secrets.io/v1.NebiusWorkloadIdentity">NebiusWorkloadIdentity
+</h3>
+<p>
+(<em>Appears on:</em>
+<a href="#external-secrets.io/v1.NebiusAuth">NebiusAuth</a>)
+</p>
+<p>
+<p>NebiusWorkloadIdentity defines configuration for workload identity authentication to Nebius IAM.</p>
+</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>serviceAccountRef</code></br>
+<em>
+<a href="https://pkg.go.dev/github.com/external-secrets/external-secrets/apis/meta/v1#ServiceAccountSelector">
+External Secrets meta/v1.ServiceAccountSelector
+</a>
+</em>
+</td>
+<td>
+<p>ServiceAccountRef references a Kubernetes ServiceAccount used to request a
+temporary JWT via the TokenRequest API. The JWT is then exchanged for a
+Nebius IAM token using workload federation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>iamServiceAccountID</code></br>
+<em>
+string
+</em>
+</td>
+<td>
+<p>IAMServiceAccountID is the Nebius IAM service account identifier that the
+federated Kubernetes service account should impersonate during token exchange.</p>
 </td>
 </tr>
 </tbody>
@@ -15652,6 +15712,33 @@ string
 <td>
 <p>ServerURL
 URL to your secret server installation</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>siteId</code></br>
+<em>
+int
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>SiteID is the ID of the Secret Server site for new secrets.
+PushSecret metadata can override this value for one secret.
+The provider uses 1 if this field is not set.</p>
+</td>
+</tr>
+<tr>
+<td>
+<code>disableSiteIDValidation</code></br>
+<em>
+bool
+</em>
+</td>
+<td>
+<em>(Optional)</em>
+<p>DisableSiteIDValidation permits a missing site ID for new secrets.
+The provider sends 0 if no site ID is set.</p>
 </td>
 </tr>
 <tr>
